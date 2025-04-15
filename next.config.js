@@ -11,12 +11,15 @@ const nextConfig = {
     domains: ["images.unsplash.com", "upload.wikimedia.org"],
     unoptimized: true,
   },
-  // Disable static optimization for error pages
+  // Completely disable static generation
+  output: "standalone",
+  // Disable static optimization for all pages
   experimental: {
     disableOptimizedLoading: true,
+    // Skip prerendering error pages
+    skipTrailingSlashRedirect: true,
+    skipMiddlewareUrlNormalize: true,
   },
-  // Disable static generation for error pages
-  output: "standalone",
   // Pastikan SWC digunakan
   swcMinify: true,
 }

@@ -10,65 +10,14 @@ export default function GlobalError({
   return (
     <html lang="en">
       <body>
-        <div
-          style={{
-            minHeight: "100vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "#EFF6FF",
-          }}
-        >
-          <div
-            style={{
-              textAlign: "center",
-              padding: "2rem",
-              backgroundColor: "white",
-              borderRadius: "0.5rem",
-              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-              maxWidth: "28rem",
-            }}
-          >
-            <h1
-              style={{
-                fontSize: "2.25rem",
-                fontWeight: "bold",
-                color: "#1E3A8A",
-                marginBottom: "1rem",
-              }}
-            >
-              Error
-            </h1>
-            <h2
-              style={{
-                fontSize: "1.5rem",
-                fontWeight: "600",
-                color: "#4B5563",
-                marginBottom: "1rem",
-              }}
-            >
-              Terjadi Kesalahan
-            </h2>
-            <p
-              style={{
-                color: "#6B7280",
-                marginBottom: "1.5rem",
-              }}
-            >
-              Maaf, terjadi kesalahan saat memuat halaman ini.
-            </p>
+        <div className="min-h-screen flex items-center justify-center bg-blue-50">
+          <div className="text-center p-8 bg-white rounded-lg shadow-lg max-w-md">
+            <h1 className="text-4xl font-bold text-blue-900 mb-4">500</h1>
+            <h2 className="text-2xl font-semibold text-gray-700 mb-4">Kesalahan Server</h2>
+            <p className="text-gray-600 mb-6">Maaf, terjadi kesalahan pada server kami. Silakan coba lagi nanti.</p>
             <button
               onClick={() => reset()}
-              style={{
-                display: "inline-block",
-                backgroundColor: "#2563EB",
-                color: "white",
-                padding: "0.75rem 1.5rem",
-                borderRadius: "0.5rem",
-                fontWeight: "600",
-                border: "none",
-                cursor: "pointer",
-              }}
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
             >
               Coba Lagi
             </button>
