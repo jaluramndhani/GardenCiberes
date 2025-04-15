@@ -13,6 +13,15 @@ const nextConfig = {
   },
   // Pastikan SWC digunakan
   swcMinify: true,
+  // Tambahkan konfigurasi untuk menangani error
+  onDemandEntries: {
+    // Periode cache halaman
+    maxInactiveAge: 25 * 1000,
+    // Jumlah halaman yang disimpan di cache
+    pagesBufferLength: 2,
+  },
+  // Tambahkan konfigurasi untuk static HTML export
+  trailingSlash: true,
 }
 
 module.exports = nextConfig
