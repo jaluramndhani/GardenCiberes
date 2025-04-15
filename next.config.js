@@ -15,13 +15,8 @@ const nextConfig = {
   experimental: {
     disableOptimizedLoading: true,
   },
-  // Configuración específica para las páginas de error
-  async exportPathMap(defaultPathMap, { dev, dir, outDir, distDir, buildId }) {
-    return {
-      ...defaultPathMap,
-      "/404": { page: "/404" },
-    }
-  },
+  // Remove the exportPathMap configuration as it's not compatible with app directory
+
   // Pastikan SWC digunakan
   swcMinify: true,
 }
