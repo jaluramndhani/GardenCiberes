@@ -3,8 +3,5 @@
   "buildCommand": "npm run build",
   "outputDirectory": ".next",
   "framework": "nextjs",
-  "regions": ["sin1"],
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/api/$1", "has": [{ "type": "header", "key": "x-vercel-ip-country" }] }
-  ]
+  "regions": ["sin1"]
 }

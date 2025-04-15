@@ -11,8 +11,6 @@ const nextConfig = {
     domains: ["images.unsplash.com", "upload.wikimedia.org"],
     unoptimized: true,
   },
-  // Deshabilitar completamente la prerenderización
-  output: "export",
   // Configuración específica para el App Router
   experimental: {
     appDir: true,

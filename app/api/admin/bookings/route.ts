@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server"
 import { sql } from "@/lib/db"
 
+// Configuración para rutas dinámicas
+export const dynamic = "force-dynamic"
+
 export async function GET() {
   try {
     // Ambil semua booking

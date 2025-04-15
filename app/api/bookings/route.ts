@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server"
 import { sql } from "@/lib/db"
 
+// Configuración para rutas dinámicas
+export const dynamic = "force-dynamic"
+
 // Handler untuk GET request - mengambil booking berdasarkan user ID
 export async function GET(request: Request) {
   try {
