@@ -1,19 +1,33 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Konfigurasi dasar
+  reactStrictMode: true,
+  swcMinify: true,
+
+  // Abaikan error selama build untuk memastikan build berhasil
   eslint: {
     ignoreDuringBuilds: true,
   },
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Konfigurasi untuk images
+
+  // Konfigurasi images yang diperlukan
   images: {
     domains: ["images.unsplash.com", "upload.wikimedia.org"],
-    // Gunakan unoptimized hanya jika benar-benar diperlukan
     unoptimized: true,
   },
-  // Hapus output: 'export' karena tidak kompatibel dengan API routes
-  // Hapus trailingSlash karena bisa menyebabkan masalah routing
+
+  // Pastikan Next.js mendeteksi API routes dengan benar
+  experimental: {
+    serverComponentsExternalPackages: ["@neondatabase/serverless"],
+  },
+
+  // Pastikan webpack tidak mengoptimasi terlalu agresif
+  webpack: (config) => {
+    config.experiments = { ...config.experiments, topLevelAwait: true }
+    return config
+  },
 }
 
 module.exports = nextConfig

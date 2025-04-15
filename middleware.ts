@@ -1,13 +1,22 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
-// This function can be marked `async` if using `await` inside
+// Middleware sederhana untuk memastikan routing berfungsi
 export function middleware(request: NextRequest) {
-  // Just a simple middleware to ensure Next.js generates routes-manifest.json
+  // Lanjutkan ke request berikutnya
   return NextResponse.next()
 }
 
-// See "Matching Paths" below to learn more
+// Konfigurasi untuk menjalankan middleware pada semua routes
 export const config = {
-  matcher: "/((?!api|_next/static|_next/image|favicon.ico).*)",
+  matcher: [
+    /*
+     * Match all request paths except:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - public (public files)
+     */
+    "/((?!_next/static|_next/image|favicon.ico|public).*)",
+  ],
 }
