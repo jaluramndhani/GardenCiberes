@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useAuth } from "@/context/auth-context"
@@ -10,44 +10,34 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 
 export default function Login() {
-  const [error, setError] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const [successMessage, setSuccessMessage] = useState("")
+  const [error, setError] = useState("")
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { login, isAuthenticated } = useAuth()
+  const { login } = useAuth()
 
-  // Check for registration success message
-  useEffect(() => {
-    const registered = searchParams.get("registered")
-    if (registered === "true") {
-      setSuccessMessage("Registration successful! Please log in with your new account.")
-    }
-  }, [searchParams])
+  // Cek apakah ada pesan sukses dari halaman register
+  const registered = searchParams.get("registered")
+  const redirect = searchParams.get("redirect")
 
-  // Redirect if already logged in
-  useEffect(() => {
-    if (isAuthenticated) {
-      router.push("/")
-    }
-  }, [isAuthenticated, router])
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsLoading(true)
     setError("")
+    setIsLoading(true)
 
     try {
-      const formData = new FormData(e.currentTarget)
-      const result = await login(formData)
-
-      if (result.success) {
-        router.push("/")
+      const success = await login(email, password)
+      if (success) {
+        // Redirect ke halaman yang diminta atau ke beranda
+        router.push(redirect || "/")
       } else {
-        setError(result.message || "Invalid email or password")
+        setError("Email atau password salah. Silakan coba lagi.")
       }
-    } catch (err) {
-      setError("An error occurred. Please try again.")
+    } catch (err: any) {
+      console.error("Login error:", err)
+      setError(err.message || "Gagal masuk. Silakan coba lagi.")
     } finally {
       setIsLoading(false)
     }
@@ -57,122 +47,77 @@ export default function Login() {
     <div className="min-h-screen water-bg">
       <Header variant="booking" />
 
-      <div className="container mx-auto px-4 py-16 max-w-md">
-        <div className="glass-effect rounded-2xl shadow-2xl p-8 backdrop-blur-lg">
+      <div className="container mx-auto px-4 py-12 mt-16">
+        <div className="max-w-md mx-auto glass-effect rounded-2xl shadow-2xl p-8">
           <div className="text-center mb-8">
-            <h1 className="cormorant text-4xl font-bold text-blue-900 mb-2">Welcome Back</h1>
-            <p className="text-blue-700">Sign in to access your Garden Ciberes account</p>
+            <h1 className="text-3xl font-bold text-blue-900">Masuk ke Akun Anda</h1>
+            <p className="text-gray-600 mt-2">Masukkan email dan password Anda untuk melanjutkan</p>
           </div>
+
+          {registered && (
+            <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6">
+              Pendaftaran berhasil! Silakan masuk dengan akun baru Anda.
+            </div>
+          )}
 
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">{error}</div>
           )}
 
-          {successMessage && (
-            <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6">
-              {successMessage}
-            </div>
-          )}
-
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
-                <i className="fas fa-envelope text-cyan-600 mr-2"></i>Email Address
+                Email
               </label>
               <input
-                id="email"
-                name="email"
                 type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="email@example.com"
                 required
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-300"
-                placeholder="your@email.com"
               />
             </div>
 
             <div>
-              <div className="flex justify-between items-center mb-2">
-                <label htmlFor="password" className="block text-gray-700 font-medium">
-                  <i className="fas fa-lock text-cyan-600 mr-2"></i>Password
-                </label>
-                <Link href="/forgot-password" className="text-sm text-blue-600 hover:text-blue-800">
-                  Forgot Password?
-                </Link>
-              </div>
+              <label htmlFor="password" className="block text-gray-700 font-medium mb-2">
+                Password
+              </label>
               <input
-                id="password"
-                name="password"
                 type="password"
-                required
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all duration-300"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="••••••••"
+                required
               />
             </div>
 
-            <div className="flex items-center">
-              <input
-                id="remember"
-                name="remember"
-                type="checkbox"
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-              />
-              <label htmlFor="remember" className="ml-2 block text-sm text-gray-700">
-                Remember me
-              </label>
+            <div className="flex justify-end">
+              <Link href="/forgot-password" className="text-blue-600 hover:text-blue-800 text-sm">
+                Lupa password?
+              </Link>
             </div>
 
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3 px-4 bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-lg font-semibold rounded-lg
-              hover:from-cyan-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300
-              shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
+              className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:opacity-70"
             >
-              {isLoading ? (
-                <span className="flex items-center justify-center">
-                  <i className="fas fa-circle-notch fa-spin mr-2"></i> Signing In...
-                </span>
-              ) : (
-                "Sign In"
-              )}
+              {isLoading ? "Memproses..." : "Masuk"}
             </button>
           </form>
 
-          <div className="mt-8 text-center">
+          <div className="mt-6 text-center">
             <p className="text-gray-600">
-              Don&apos;t have an account?{" "}
+              Belum punya akun?{" "}
               <Link href="/register" className="text-blue-600 hover:text-blue-800 font-medium">
-                Register Now
+                Daftar sekarang
               </Link>
             </p>
           </div>
-
-          <div className="mt-8 pt-6 border-t border-gray-200">
-            <p className="text-center text-gray-600 mb-4">Or continue with</p>
-            <div className="flex justify-center space-x-4">
-              <button className="flex items-center justify-center p-3 rounded-full border border-gray-300 hover:bg-gray-50 transition-colors">
-                <i className="fab fa-google text-red-500"></i>
-              </button>
-              <button className="flex items-center justify-center p-3 rounded-full border border-gray-300 hover:bg-gray-50 transition-colors">
-                <i className="fab fa-facebook-f text-blue-600"></i>
-              </button>
-              <button className="flex items-center justify-center p-3 rounded-full border border-gray-300 hover:bg-gray-50 transition-colors">
-                <i className="fab fa-apple text-gray-800"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-8 text-center">
-          <p className="text-sm text-gray-600">
-            By signing in, you agree to our{" "}
-            <Link href="#" className="text-blue-600 hover:text-blue-800">
-              Terms of Service
-            </Link>{" "}
-            and{" "}
-            <Link href="#" className="text-blue-600 hover:text-blue-800">
-              Privacy Policy
-            </Link>
-          </p>
         </div>
       </div>
 

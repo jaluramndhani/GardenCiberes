@@ -6,36 +6,25 @@ import Footer from "@/components/footer"
 const packages = [
   {
     id: "weekend-premium",
-    title: "Weekend Premium",
-    subtitle: "Luxury Pool Experience",
+    title: "Akhir Pekan",
+    subtitle: "Pengalaman Kolam Renang Mewah",
     image:
       "https://images.unsplash.com/photo-1572331165267-854da2b10ccc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
     time: "06:00 - 09:00",
     maxPersons: 50,
     price: 25000,
-    features: ["Access to Premium Pool Area", "Luxury Loungers & Cabanas", "Towel Service"],
+    features: ["Akses ke Area Kolam Premium", "Kursi Santai & Gazebo Mewah", "Layanan Handuk"],
   },
   {
     id: "weekday-deluxe",
-    title: "Weekday Deluxe",
-    subtitle: "Exclusive Pool Access",
+    title: "Deluxe Hari Kerja",
+    subtitle: "Akses Kolam Eksklusif",
     image:
       "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
     time: "08:00 - 11:00",
     maxPersons: 30,
     price: 15000,
-    features: ["Access to Deluxe Pool Area", "Premium Loungers", "Basic Amenities"],
-  },
-  {
-    id: "family-package",
-    title: "Family Package",
-    subtitle: "Perfect for Families",
-    image:
-      "https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
-    time: "09:00 - 12:00",
-    maxPersons: 40,
-    price: 20000,
-    features: ["Access to Family Pool Area", "Kids Pool Access", "Family Amenities"],
+    features: ["Akses ke Area Kolam Deluxe", "Kursi Santai Premium", "Fasilitas Dasar"],
   },
 ]
 
@@ -47,14 +36,16 @@ export default function Packages() {
       <main className="container mx-auto mt-24">
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4">Luxury Pool Experience</h1>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+            Pengalaman Kolam Renang Mewah
+          </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Immerse yourself in the ultimate relaxation with our world-class swimming pools
+            Nikmati relaksasi terbaik dengan kolam renang kelas dunia kami
           </p>
         </div>
 
         {/* Price Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 max-w-4xl mx-auto">
           {packages.map((pkg) => (
             <div key={pkg.id} className="luxury-card rounded-2xl overflow-hidden">
               <div className="relative h-48">
@@ -67,7 +58,7 @@ export default function Packages() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 <div className="absolute bottom-4 left-4">
-                  <h3 className="text-white text-2xl font-bold">{pkg.title}</h3>
+                  <h3 className="text-white text-2xl font-bold">Weekend</h3>
                   <p className="text-blue-200">{pkg.subtitle}</p>
                 </div>
               </div>
@@ -79,12 +70,12 @@ export default function Packages() {
                       {pkg.time}
                     </p>
                     <p className="text-sm">
-                      <i className="fas fa-user-friends mr-2"></i>Max {pkg.maxPersons} persons
+                      <i className="fas fa-user-friends mr-2"></i>Maks {pkg.maxPersons} orang
                     </p>
                   </div>
                   <div className="text-right">
                     <p className="text-3xl font-bold text-blue-600">Rp {pkg.price.toLocaleString()}</p>
-                    <p className="text-sm text-gray-500">per person</p>
+                    <p className="text-sm text-gray-500">per orang</p>
                   </div>
                 </div>
                 <div className="space-y-4">
@@ -95,41 +86,47 @@ export default function Packages() {
                     </div>
                   ))}
                 </div>
-                <Link href={`/booking?visitors=${pkg.maxPersons}`} className="block mt-6">
-                  <button className="w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                    Reserve Now
-                  </button>
-                </Link>
               </div>
             </div>
           ))}
         </div>
 
+        <div className="text-center mt-12 mb-12">
+          <Link
+            href="/booking"
+            className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-block"
+          >
+            Pesan Sekarang
+          </Link>
+        </div>
+
         {/* Additional Information */}
         <div className="bg-white rounded-2xl p-8 shadow-lg">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Additional Information</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">Informasi Tambahan</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="flex items-start space-x-4">
               <i className="fas fa-child text-3xl text-blue-600"></i>
               <div>
-                <h3 className="text-lg font-semibold mb-2">Children Policy</h3>
+                <h3 className="text-lg font-semibold mb-2">Kebijakan Anak-anak</h3>
                 <p className="text-gray-600">
-                  Children under 90cm height can enter for free when accompanied by paying adults
+                  Anak-anak dengan tinggi di bawah 90cm dapat masuk gratis jika didampingi orang dewasa yang membayar
                 </p>
               </div>
             </div>
             <div className="flex items-start space-x-4">
               <i className="fas fa-clock text-3xl text-blue-600"></i>
               <div>
-                <h3 className="text-lg font-semibold mb-2">Operating Hours</h3>
-                <p className="text-gray-600">Open daily from 06:00 AM to 09:00 PM. Last entry 1 hour before closing</p>
+                <h3 className="text-lg font-semibold mb-2">Jam Operasional</h3>
+                <p className="text-gray-600">
+                  Buka setiap hari dari jam 08:00 sampai 17:00. Masuk terakhir 1 jam sebelum tutup
+                </p>
               </div>
             </div>
             <div className="flex items-start space-x-4">
               <i className="fas fa-umbrella-beach text-3xl text-blue-600"></i>
               <div>
-                <h3 className="text-lg font-semibold mb-2">Amenities</h3>
-                <p className="text-gray-600">Loungers, towels, and lockers available for all guests</p>
+                <h3 className="text-lg font-semibold mb-2">Fasilitas</h3>
+                <p className="text-gray-600">Kursi santai, handuk, dan loker tersedia untuk semua tamu</p>
               </div>
             </div>
           </div>

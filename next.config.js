@@ -1,21 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  // Konfigurasi minimal untuk Vercel
   images: {
     domains: ["images.unsplash.com", "upload.wikimedia.org"],
-    unoptimized: true,
-  },
-  // Add this to handle the static HTML files
-  async rewrites() {
-    return [
+    // Jangan gunakan unoptimized di Vercel
+    remotePatterns: [
       {
-        source: "/:path*.html",
-        destination: "/:path*.html",
+        protocol: "https",
+        hostname: "**",
       },
-    ]
+    ],
   },
-  // This is important for Vercel deployment
-  output: "standalone",
+  // Pastikan tidak ada output: export
+  // Pastikan tidak ada trailingSlash
+  // Pastikan tidak ada konfigurasi yang menyebabkan static export
 }
 
 module.exports = nextConfig

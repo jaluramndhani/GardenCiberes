@@ -1,33 +1,40 @@
 "use client"
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
-import { loginUser, logoutUser, type AuthResult } from "@/app/actions/auth-actions"
 
+// Tipe data untuk user
 type User = {
-  id: number
+  id: string
   name: string
   email: string
+  phone_number?: string
+  profile_image?: string
 }
 
+// Tipe data untuk context autentikasi
 type AuthContextType = {
   user: User | null
   isLoading: boolean
-  login: (formData: FormData) => Promise<AuthResult>
-  logout: () => Promise<void>
+  login: (email: string, password: string) => Promise<boolean>
+  logout: () => void
   isAuthenticated: boolean
-  setUser: (user: User | null) => void
+  updateProfile: (data: Partial<User>) => Promise<boolean>
 }
 
+// Membuat context untuk autentikasi
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
+// Provider untuk context autentikasi
 export function AuthProvider({ children }: { children: ReactNode }) {
+  // State untuk menyimpan data user dan status loading
   const [user, setUser] = useState<User | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
-  // Check if user is logged in on initial load
+  // Cek apakah user sudah login saat aplikasi dimuat
   useEffect(() => {
     if (typeof window !== "undefined") {
       try {
+        // Ambil data user dari localStorage
         const storedUser = localStorage.getItem("user")
         if (storedUser) {
           setUser(JSON.parse(storedUser))
@@ -39,57 +46,100 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  // Login function
-  const login = async (formData: FormData): Promise<AuthResult> => {
+  // Fungsi untuk login
+  const login = async (email: string, password: string): Promise<boolean> => {
     setIsLoading(true)
     try {
-      const result = await loginUser(formData)
+      // Kirim request ke API login
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      })
 
-      if (result.success && result.user) {
-        setUser(result.user)
-        try {
-          localStorage.setItem("user", JSON.stringify(result.user))
-        } catch (error) {
-          console.error("Error writing to localStorage:", error)
-        }
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.error || "Login failed")
       }
 
-      return result
+      // Simpan data user ke state dan localStorage
+      const userData = await response.json()
+      setUser(userData)
+      try {
+        localStorage.setItem("user", JSON.stringify(userData))
+      } catch (error) {
+        console.error("Error writing to localStorage:", error)
+      }
+      return true
     } catch (error) {
       console.error("Login error:", error)
-      return { success: false, message: "An unexpected error occurred" }
+      return false
     } finally {
       setIsLoading(false)
     }
   }
 
-  // Logout function
-  const logout = async () => {
+  // Fungsi untuk logout
+  const logout = () => {
+    // Hapus data user dari state dan localStorage
+    setUser(null)
     try {
-      await logoutUser()
-      setUser(null)
-      try {
-        localStorage.removeItem("user")
-      } catch (error) {
-        console.error("Error removing from localStorage:", error)
-      }
+      localStorage.removeItem("user")
     } catch (error) {
-      console.error("Logout error:", error)
+      console.error("Error removing from localStorage:", error)
     }
   }
 
+  // Fungsi untuk update profil user
+  const updateProfile = async (data: Partial<User>): Promise<boolean> => {
+    if (!user) return false
+
+    try {
+      // Kirim request ke API update profil
+      const response = await fetch("/api/profile", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: user.id, ...data }),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || "Failed to update profile")
+      }
+
+      // Update data user di state dan localStorage
+      const updatedUser = await response.json()
+      setUser(updatedUser)
+      try {
+        localStorage.setItem("user", JSON.stringify(updatedUser))
+      } catch (error) {
+        console.error("Error writing to localStorage:", error)
+      }
+      return true
+    } catch (error) {
+      console.error("Update profile error:", error)
+      return false
+    }
+  }
+
+  // Nilai yang akan disediakan oleh context
   const value = {
     user,
     isLoading,
     login,
     logout,
     isAuthenticated: !!user,
-    setUser,
+    updateProfile,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
+// Hook untuk menggunakan context autentikasi
 export function useAuth() {
   const context = useContext(AuthContext)
   if (context === undefined) {
