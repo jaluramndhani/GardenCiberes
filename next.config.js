@@ -11,12 +11,12 @@ const nextConfig = {
     domains: ["images.unsplash.com", "upload.wikimedia.org"],
     unoptimized: true,
   },
-  // Deshabilitar la prerenderización de las páginas de error
+  // Disable static optimization for error pages
   experimental: {
     disableOptimizedLoading: true,
   },
-  // Remove the exportPathMap configuration as it's not compatible with app directory
-
+  // Disable static generation for error pages
+  output: "standalone",
   // Pastikan SWC digunakan
   swcMinify: true,
 }
