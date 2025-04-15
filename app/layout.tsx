@@ -3,9 +3,6 @@ import type { Metadata } from "next"
 import { AuthProvider } from "@/context/auth-context"
 import "./globals.css"
 
-// Hapus import font dari next/font/google dan gunakan CSS biasa
-// Kita akan menambahkan font melalui link tag
-
 export const metadata: Metadata = {
   title: "Garden Ciberes - Premium Pool Experience",
   description: "Experience luxury pool services at Garden Ciberes",
@@ -21,7 +18,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-        {/* Tambahkan font Google melalui link tag */}
         <link
           href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
           rel="stylesheet"

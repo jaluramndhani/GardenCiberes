@@ -13,6 +13,7 @@ export default function Header({ variant = "default" }: HeaderProps) {
   // State untuk mengontrol tampilan header
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   // Hooks untuk autentikasi dan routing
   const { user, logout, isAuthenticated } = useAuth()
@@ -20,6 +21,8 @@ export default function Header({ variant = "default" }: HeaderProps) {
 
   // Effect untuk mendeteksi scroll dan mengubah tampilan header
   useEffect(() => {
+    setMounted(true)
+
     const handleScroll = () => {
       if (window.scrollY > 10) {
         setIsScrolled(true)
@@ -49,6 +52,21 @@ export default function Header({ variant = "default" }: HeaderProps) {
   const handleLogout = () => {
     logout()
     router.push("/")
+  }
+
+  // Jika komponen belum di-mount, tampilkan header sederhana
+  if (!mounted) {
+    return (
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex justify-between items-center">
+            <Link href="/" className="flex items-center">
+              <img src="/images/garden-ciberes-logo.png" alt="Garden Ciberes Logo" className="h-20 sm:h-24" />
+            </Link>
+          </div>
+        </div>
+      </header>
+    )
   }
 
   return (
@@ -119,7 +137,7 @@ export default function Header({ variant = "default" }: HeaderProps) {
                     Pemesanan Saya
                   </Link>
                   {/* Tampilkan link admin jika user adalah admin (ID 34) */}
-                  {user?.id === 34 && (
+                  {user?.id === "34" && (
                     <Link href="/admin" className="block px-4 py-2 text-gray-800 hover:bg-blue-50 hover:text-blue-600">
                       Admin Dashboard
                     </Link>
@@ -209,7 +227,7 @@ export default function Header({ variant = "default" }: HeaderProps) {
                   >
                     Pemesanan Saya
                   </Link>
-                  {user?.id === 34 && (
+                  {user?.id === "34" && (
                     <Link
                       href="/admin"
                       className="block hover:text-blue-600 transition-colors mt-2"

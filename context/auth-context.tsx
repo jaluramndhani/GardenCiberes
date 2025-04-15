@@ -9,6 +9,7 @@ type User = {
   email: string
   phone_number?: string
   profile_image?: string
+  created_at?: string
 }
 
 // Tipe data untuk context autentikasi
