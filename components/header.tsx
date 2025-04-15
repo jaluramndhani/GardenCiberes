@@ -92,8 +92,20 @@ export default function Header({ variant = "default" }: HeaderProps) {
                 <button
                   className={`flex items-center transition-colors ${!isScrolled && variant === "transparent" ? "text-white hover:text-blue-200" : "hover:text-blue-600"}`}
                 >
-                  <span className="mr-1">{user?.name || "Pengguna"}</span>
-                  <i className="fas fa-chevron-down text-xs"></i>
+                  {user?.profile_image ? (
+                    <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-200">
+                      <img
+                        src={user.profile_image || "/placeholder.svg"}
+                        alt={user?.name || "Profil"}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center border-2 border-blue-200">
+                      <i className="fas fa-user text-blue-600 text-lg"></i>
+                    </div>
+                  )}
+                  <i className="fas fa-chevron-down text-xs ml-3"></i>
                 </button>
                 {/* Dropdown menu untuk user yang sudah login */}
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
@@ -167,7 +179,22 @@ export default function Header({ variant = "default" }: HeaderProps) {
             {isAuthenticated ? (
               <>
                 <div className="border-t border-gray-200 pt-4">
-                  <p className="text-gray-500 mb-2">Masuk sebagai: {user?.name || "Pengguna"}</p>
+                  <div className="flex items-center mb-2">
+                    {user?.profile_image ? (
+                      <div className="w-10 h-10 rounded-full overflow-hidden mr-3">
+                        <img
+                          src={user.profile_image || "/placeholder.svg"}
+                          alt={user?.name || "Profil"}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                        <i className="fas fa-user text-blue-600"></i>
+                      </div>
+                    )}
+                    <p className="text-gray-500">Masuk sebagai: {user?.name || "Pengguna"}</p>
+                  </div>
                   <Link
                     href="/profile"
                     className="block hover:text-blue-600 transition-colors"
