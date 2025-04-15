@@ -2,6 +2,7 @@ import { neon } from "@neondatabase/serverless"
 
 // Gunakan string koneksi yang diberikan untuk terhubung ke database Neon PostgreSQL
 const DATABASE_URL =
+  process.env.DATABASE_URL ||
   "postgres://neondb_owner:npg_ibNWf91JTPak@ep-noisy-sky-a1c7alxa-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
 
 // Buat instance SQL client untuk menjalankan query ke database
