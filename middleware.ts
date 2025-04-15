@@ -1,27 +1,22 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
+// Middleware sederhana untuk memastikan routing berfungsi
 export function middleware(request: NextRequest) {
-  // Tangani error dengan mencoba redirect ke halaman HTML statis jika terjadi error
-  try {
-    return NextResponse.next()
-  } catch (error) {
-    console.error("Middleware error:", error)
-    // Redirect ke halaman HTML statis jika terjadi error
-    return NextResponse.redirect(new URL("/html/landingpage.html", request.url))
-  }
+  // Lanjutkan ke request berikutnya
+  return NextResponse.next()
 }
 
+// Konfigurasi untuk menjalankan middleware pada semua routes
 export const config = {
   matcher: [
     /*
-     * Match all request paths except for the ones starting with:
+     * Match all request paths except:
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      * - public (public files)
-     * - html (static HTML files)
      */
-    "/((?!_next/static|_next/image|favicon.ico|public|html).*)",
+    "/((?!_next/static|_next/image|favicon.ico|public).*)",
   ],
 }
