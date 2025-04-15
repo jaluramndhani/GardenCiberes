@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "builds": [{ "src": "next.config.js", "use": "@vercel/next" }, { "src": "*.html", "use": "@vercel/static" }],
+  "routes": [
+    { "src": "/landingpage.html", "dest": "/landingpage.html" },
+    { "src": "/booking.html", "dest": "/booking.html" },
+    { "src": "/pesanan.html", "dest": "/pesanan.html" },
+    { "src": "/(.*)", "dest": "/" }
+  ]
+}

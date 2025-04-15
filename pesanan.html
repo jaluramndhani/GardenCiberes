@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garden Ciberes - Luxury Pool Price List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        .luxury-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .luxury-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .water-ripple {
+            background: linear-gradient(to right, #0284c7 0%, #0ea5e9 100%);
+            background-size: 200% 200%;
+            animation: ripple 5s ease infinite;
+        }
+        @keyframes ripple {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+    </style>
+</head>
+<body class="min-h-screen py-12 px-4 sm:px-6">
+    <!-- Header -->
+    <header class="water-ripple fixed top-0 left-0 right-0 z-50 px-4 py-3">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="aset/GARDEN CIBERES LOGO - PPKD1 1.png" alt="Garden Ciberes Logo" class="h-12 sm:h-16">
+            </div>
+            <nav class="flex items-center space-x-6">
+                <a href="landingpage.html" class="text-white hover:text-blue-100 transition-colors text-sm sm:text-base font-medium">Home</a>
+                <a href="#" class="text-white hover:text-blue-100 transition-colors text-sm sm:text-base font-medium">My Bookings</a>
+                <i class="fas fa-user-circle text-white text-2xl sm:text-3xl"></i>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto mt-24">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+                Luxury Pool Experience
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Immerse yourself in the ultimate relaxation with our world-class swimming pools
+            </p>
+        </div>
+
+        <!-- Price Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Weekend Premium Package -->
+            <div class="luxury-card rounded-2xl overflow-hidden">
+                <div class="relative h-48">
+                    <img src="https://images.unsplash.com/photo-1572331165267-854da2b10ccc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" 
+                         alt="Premium Pool" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4">
+                        <h3 class="text-white text-2xl font-bold">Weekend Premium</h3>
+                        <p class="text-blue-200">Luxury Pool Experience</p>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="text-gray-600">
+                            <p class="text-sm"><i class="far fa-clock mr-2"></i>06:00 - 09:00</p>
+                            <p class="text-sm"><i class="fas fa-user-friends mr-2"></i>Max 50 persons</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-3xl font-bold text-blue-600">Rp 25.000</p>
+                            <p class="text-sm text-gray-500">per person</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Access to Premium Pool Area</span>
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Luxury Loungers & Cabanas</span>
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Towel Service</span>
+                        </div>
+                    </div>
+                    <a href="booking.html?visitors=50" class="block mt-6">
+                        <button class="w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                            Reserve Now
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Weekday Deluxe Package -->
+            <div class="luxury-card rounded-2xl overflow-hidden">
+                <div class="relative h-48">
+                    <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" 
+                         alt="Deluxe Pool" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4">
+                        <h3 class="text-white text-2xl font-bold">Weekday Deluxe</h3>
+                        <p class="text-blue-200">Exclusive Pool Access</p>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="text-gray-600">
+                            <p class="text-sm"><i class="far fa-clock mr-2"></i>08:00 - 11:00</p>
+                            <p class="text-sm"><i class="fas fa-user-friends mr-2"></i>Max 30 persons</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-3xl font-bold text-blue-600">Rp 15.000</p>
+                            <p class="text-sm text-gray-500">per person</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Access to Deluxe Pool Area</span>
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Premium Loungers</span>
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Basic Amenities</span>
+                        </div>
+                    </div>
+                    <a href="booking.html?visitors=30" class="block mt-6">
+                        <button class="w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                            Reserve Now
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Family Package -->
+            <div class="luxury-card rounded-2xl overflow-hidden">
+                <div class="relative h-48">
+                    <img src="https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" 
+                         alt="Family Pool" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4">
+                        <h3 class="text-white text-2xl font-bold">Family Package</h3>
+                        <p class="text-blue-200">Perfect for Families</p>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="text-gray-600">
+                            <p class="text-sm"><i class="far fa-clock mr-2"></i>09:00 - 12:00</p>
+                            <p class="text-sm"><i class="fas fa-user-friends mr-2"></i>Max 40 persons</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-3xl font-bold text-blue-600">Rp 20.000</p>
+                            <p class="text-sm text-gray-500">per person</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Access to Family Pool Area</span>
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Kids Pool Access</span>
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                            <span>Family Amenities</span>
+                        </div>
+                    </div>
+                    <a href="booking.html?visitors=40" class="block mt-6">
+                        <button class="w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                            Reserve Now
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">Additional Information</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="flex items-start space-x-4">
+                    <i class="fas fa-child text-3xl text-blue-600"></i>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Children Policy</h3>
+                        <p class="text-gray-600">Children under 90cm height can enter for free when accompanied by paying adults</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <i class="fas fa-clock text-3xl text-blue-600"></i>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Operating Hours</h3>
+                        <p class="text-gray-600">Open daily from 06:00 AM to 09:00 PM. Last entry 1 hour before closing</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <i class="fas fa-umbrella-beach text-3xl text-blue-600"></i>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Amenities</h3>
+                        <p class="text-gray-600">Loungers, towels, and lockers available for all guests</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="water-ripple text-white text-center py-6 mt-16">
+        <p>&copy; 2023 Garden Ciberes. All rights reserved.</p>
+    </footer>
+</body>
+</html>
