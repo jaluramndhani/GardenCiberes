@@ -11,14 +11,12 @@ const nextConfig = {
     domains: ["images.unsplash.com", "upload.wikimedia.org"],
     unoptimized: true,
   },
-  // Completely disable static generation
-  output: "standalone",
-  // Disable static optimization for all pages
+  // Deshabilitar completamente la prerenderización
+  output: "export",
+  // Configuración específica para el App Router
   experimental: {
-    disableOptimizedLoading: true,
-    // Skip prerendering error pages
-    skipTrailingSlashRedirect: true,
-    skipMiddlewareUrlNormalize: true,
+    appDir: true,
+    serverComponentsExternalPackages: ["@neondatabase/serverless"],
   },
   // Pastikan SWC digunakan
   swcMinify: true,

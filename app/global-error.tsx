@@ -10,14 +10,64 @@ export default function GlobalError({
   return (
     <html lang="en">
       <body>
-        <div className="min-h-screen flex items-center justify-center bg-blue-50">
-          <div className="text-center p-8 bg-white rounded-lg shadow-lg max-w-md">
-            <h1 className="text-4xl font-bold text-blue-900 mb-4">500</h1>
-            <h2 className="text-2xl font-semibold text-gray-700 mb-4">Kesalahan Server</h2>
-            <p className="text-gray-600 mb-6">Maaf, terjadi kesalahan pada server kami. Silakan coba lagi nanti.</p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+            backgroundColor: "#f0f9ff",
+          }}
+        >
+          <div
+            style={{
+              textAlign: "center",
+              padding: "2rem",
+              backgroundColor: "white",
+              borderRadius: "0.5rem",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              maxWidth: "28rem",
+            }}
+          >
+            <h1
+              style={{
+                fontSize: "2.25rem",
+                fontWeight: "bold",
+                color: "#1e3a8a",
+                marginBottom: "1rem",
+              }}
+            >
+              Error
+            </h1>
+            <h2
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: "600",
+                color: "#4b5563",
+                marginBottom: "1rem",
+              }}
+            >
+              Terjadi Kesalahan
+            </h2>
+            <p
+              style={{
+                color: "#6b7280",
+                marginBottom: "1.5rem",
+              }}
+            >
+              Maaf, terjadi kesalahan saat memuat aplikasi. Silakan coba lagi.
+            </p>
             <button
               onClick={() => reset()}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+              style={{
+                backgroundColor: "#2563eb",
+                color: "white",
+                padding: "0.75rem 1.5rem",
+                borderRadius: "0.5rem",
+                fontWeight: "600",
+                border: "none",
+                cursor: "pointer",
+              }}
             >
               Coba Lagi
             </button>

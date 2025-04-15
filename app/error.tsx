@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect } from "react"
-import Link from "next/link"
 
 export default function Error({
   error,
@@ -11,31 +10,85 @@ export default function Error({
   reset: () => void
 }) {
   useEffect(() => {
-    // Log the error to an error reporting service
     console.error(error)
   }, [error])
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-50">
-      <div className="text-center p-8 bg-white rounded-lg shadow-lg max-w-md">
-        <h1 className="text-4xl font-bold text-blue-900 mb-4">Error</h1>
-        <h2 className="text-2xl font-semibold text-gray-700 mb-4">Terjadi Kesalahan</h2>
-        <p className="text-gray-600 mb-6">
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        backgroundColor: "#f0f9ff",
+      }}
+    >
+      <div
+        style={{
+          textAlign: "center",
+          padding: "2rem",
+          backgroundColor: "white",
+          borderRadius: "0.5rem",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          maxWidth: "28rem",
+        }}
+      >
+        <h1
+          style={{
+            fontSize: "2.25rem",
+            fontWeight: "bold",
+            color: "#1e3a8a",
+            marginBottom: "1rem",
+          }}
+        >
+          Error
+        </h1>
+        <h2
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: "600",
+            color: "#4b5563",
+            marginBottom: "1rem",
+          }}
+        >
+          Terjadi Kesalahan
+        </h2>
+        <p
+          style={{
+            color: "#6b7280",
+            marginBottom: "1.5rem",
+          }}
+        >
           Maaf, terjadi kesalahan saat memuat halaman ini. Silakan coba lagi atau kembali ke halaman utama.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div style={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
           <button
             onClick={() => reset()}
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+            style={{
+              backgroundColor: "#2563eb",
+              color: "white",
+              padding: "0.75rem 1.5rem",
+              borderRadius: "0.5rem",
+              fontWeight: "600",
+              border: "none",
+              cursor: "pointer",
+            }}
           >
             Coba Lagi
           </button>
-          <Link
+          <a
             href="/"
-            className="bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors"
+            style={{
+              backgroundColor: "#4b5563",
+              color: "white",
+              padding: "0.75rem 1.5rem",
+              borderRadius: "0.5rem",
+              fontWeight: "600",
+              textDecoration: "none",
+            }}
           >
             Kembali ke Beranda
-          </Link>
+          </a>
         </div>
       </div>
     </div>

@@ -1,6 +1,10 @@
 {
   "version": 2,
-  "buildCommand": "next build",
+  "buildCommand": "npm run build",
   "outputDirectory": ".next",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "regions": ["sin1"],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/api/$1", "has": [{ "type": "header", "key": "x-vercel-ip-country" }] }
+  ]
 }
