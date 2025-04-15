@@ -8,9 +8,11 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
+    domains: ["images.unsplash.com", "upload.wikimedia.org"],
     unoptimized: true,
   },
-  // Tidak ada konfigurasi lain yang bisa menyebabkan konflik
+  // Pastikan SWC digunakan
+  swcMinify: true,
 }
 
 module.exports = nextConfig

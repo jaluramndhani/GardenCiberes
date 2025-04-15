@@ -9,7 +9,7 @@
 }
 
 body {
-  font-family: var(--font-montserrat);
+  font-family: "Montserrat", sans-serif;
   background: linear-gradient(
     135deg,
     rgb(var(--background-start-rgb)) 0%,
@@ -19,9 +19,10 @@ body {
 }
 
 .cormorant {
-  font-family: var(--font-playfair);
+  font-family: "Playfair Display", serif;
 }
 
+/* Sisanya tetap sama */
 .water-ripple {
   background: linear-gradient(45deg, #1a237e 0%, #0d47a1 50%, #0277bd 100%);
   position: relative;
